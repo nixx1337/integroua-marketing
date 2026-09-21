@@ -341,7 +341,7 @@ function initPremiumIntro() {
   }, totalDuration);
 }
 
-/* Continuous Abstract Chaotic Floating Waves on Background (Speed 0.4) */
+/* Continuous Dark Amorphous Silver Liquid & Smoke Background (Speed 0.4) */
 function initAmbientBackgroundWaves() {
   const canvas = document.getElementById('bg-floating-waves');
   if (!canvas) return;
@@ -356,115 +356,165 @@ function initAmbientBackgroundWaves() {
     height = canvas.height = window.innerHeight;
   });
 
-  // Base speed requested by user: 0.4
   const speed = 0.4;
-  let step = 0;
+  let time = 0;
 
-  // Chaotic, vibrant multi-harmonic wave layers
-  const waveLayers = [
+  // Amorphous liquid smoke & silver mercury layers
+  const liquidLayers = [
     {
-      yRatio: 0.28,
-      amplitude: 80,
-      freq1: 0.0016,
-      freq2: 0.0037,
-      freq3: 0.0009,
-      speed1: 1.1,
-      speed2: -0.85,
-      speed3: 0.6,
-      phase: 0.4,
-      gradient: ['rgba(251, 191, 36, 0.45)', 'rgba(217, 119, 6, 0.05)'],
-      stroke: 'rgba(253, 224, 71, 0.95)',
-      glow: '#F59E0B',
-      lineWidth: 3.2
+      baseYRatio: 0.32,
+      amp: 110,
+      f1: 0.0009,
+      f2: 0.0021,
+      f3: 0.0004,
+      s1: 0.7,
+      s2: -0.5,
+      s3: 0.3,
+      phase: 0.2,
+      gradient: [
+        { stop: 0, color: 'rgba(226, 232, 240, 0.09)' },
+        { stop: 0.25, color: 'rgba(148, 163, 184, 0.05)' },
+        { stop: 0.65, color: 'rgba(30, 41, 59, 0.04)' },
+        { stop: 1, color: 'rgba(5, 7, 10, 0.00)' }
+      ],
+      stroke: 'rgba(241, 245, 249, 0.28)',
+      glow: 'rgba(226, 232, 240, 0.22)',
+      blur: 24,
+      lineWidth: 1.6
     },
     {
-      yRatio: 0.46,
-      amplitude: 105,
-      freq1: 0.0022,
-      freq2: 0.0049,
-      freq3: 0.0012,
-      speed1: -0.9,
-      speed2: 1.3,
-      speed3: -0.5,
-      phase: 1.8,
-      gradient: ['rgba(56, 189, 248, 0.42)', 'rgba(2, 132, 199, 0.04)'],
-      stroke: 'rgba(125, 211, 252, 0.90)',
-      glow: '#38BDF8',
-      lineWidth: 3.0
+      baseYRatio: 0.50,
+      amp: 140,
+      f1: 0.0012,
+      f2: 0.0028,
+      f3: 0.0006,
+      s1: -0.6,
+      s2: 0.8,
+      s3: -0.4,
+      phase: 1.9,
+      gradient: [
+        { stop: 0, color: 'rgba(203, 213, 225, 0.08)' },
+        { stop: 0.3, color: 'rgba(100, 116, 139, 0.05)' },
+        { stop: 0.7, color: 'rgba(15, 23, 42, 0.03)' },
+        { stop: 1, color: 'rgba(5, 7, 10, 0.00)' }
+      ],
+      stroke: 'rgba(203, 213, 225, 0.22)',
+      glow: 'rgba(148, 163, 184, 0.18)',
+      blur: 20,
+      lineWidth: 1.4
     },
     {
-      yRatio: 0.64,
-      amplitude: 90,
-      freq1: 0.0013,
-      freq2: 0.0031,
-      freq3: 0.0021,
-      speed1: 1.3,
-      speed2: -1.1,
-      speed3: 0.8,
-      phase: 3.2,
-      gradient: ['rgba(16, 185, 129, 0.38)', 'rgba(5, 150, 105, 0.04)'],
-      stroke: 'rgba(110, 231, 183, 0.85)',
-      glow: '#10B981',
-      lineWidth: 2.8
+      baseYRatio: 0.68,
+      amp: 125,
+      f1: 0.0008,
+      f2: 0.0019,
+      f3: 0.0003,
+      s1: 0.8,
+      s2: -0.7,
+      s3: 0.5,
+      phase: 3.7,
+      gradient: [
+        { stop: 0, color: 'rgba(241, 245, 249, 0.07)' },
+        { stop: 0.35, color: 'rgba(71, 85, 105, 0.04)' },
+        { stop: 0.8, color: 'rgba(15, 23, 42, 0.02)' },
+        { stop: 1, color: 'rgba(5, 7, 10, 0.00)' }
+      ],
+      stroke: 'rgba(226, 232, 240, 0.20)',
+      glow: 'rgba(203, 213, 225, 0.15)',
+      blur: 22,
+      lineWidth: 1.2
     },
     {
-      yRatio: 0.82,
-      amplitude: 115,
-      freq1: 0.0019,
-      freq2: 0.0041,
-      freq3: 0.0008,
-      speed1: -1.0,
-      speed2: 0.7,
-      speed3: 1.4,
-      phase: 4.6,
-      gradient: ['rgba(245, 158, 11, 0.40)', 'rgba(180, 83, 9, 0.04)'],
-      stroke: 'rgba(251, 191, 36, 0.88)',
-      glow: '#FBBF24',
-      lineWidth: 3.0
+      baseYRatio: 0.86,
+      amp: 160,
+      f1: 0.0010,
+      f2: 0.0024,
+      f3: 0.0005,
+      s1: -0.5,
+      s2: 0.6,
+      s3: 0.9,
+      phase: 5.1,
+      gradient: [
+        { stop: 0, color: 'rgba(148, 163, 184, 0.06)' },
+        { stop: 0.4, color: 'rgba(51, 65, 85, 0.04)' },
+        { stop: 0.9, color: 'rgba(15, 23, 42, 0.01)' },
+        { stop: 1, color: 'rgba(5, 7, 10, 0.00)' }
+      ],
+      stroke: 'rgba(148, 163, 184, 0.18)',
+      glow: 'rgba(100, 116, 139, 0.12)',
+      blur: 26,
+      lineWidth: 1.2
     }
+  ];
+
+  // Amorphous floating smoke puffs / liquid specular light pools
+  const smokePuffs = [
+    { xRatio: 0.25, yRatio: 0.35, radius: 420, sX: 0.3, sY: 0.4, alpha: 0.06 },
+    { xRatio: 0.75, yRatio: 0.60, radius: 480, sX: -0.35, sY: 0.25, alpha: 0.05 },
+    { xRatio: 0.50, yRatio: 0.80, radius: 520, sX: 0.2, sY: -0.3, alpha: 0.05 }
   ];
 
   function render() {
     ctx.clearRect(0, 0, width, height);
-    step += speed * 0.022;
+    time += speed * 0.012;
 
-    waveLayers.forEach((wave) => {
-      const baseY = height * wave.yRatio;
-      
-      // 1. Fill polygon for gradient (extends outside viewport to avoid borders)
+    // 1. Render amorphous drifting liquid smoke clouds (soft, unrecognizable volume)
+    smokePuffs.forEach((puff, idx) => {
+      const px = width * puff.xRatio + Math.sin(time * puff.sX + idx * 2) * 140;
+      const py = height * puff.yRatio + Math.cos(time * puff.sY + idx) * 100;
+      const rad = puff.radius + Math.sin(time * 0.5 + idx) * 60;
+
+      const radialGrad = ctx.createRadialGradient(px, py, 0, px, py, rad);
+      radialGrad.addColorStop(0, `rgba(203, 213, 225, ${puff.alpha})`);
+      radialGrad.addColorStop(0.4, `rgba(71, 85, 105, ${puff.alpha * 0.5})`);
+      radialGrad.addColorStop(0.8, 'rgba(15, 23, 42, 0.01)');
+      radialGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+
+      ctx.fillStyle = radialGrad;
       ctx.beginPath();
-      ctx.moveTo(-30, height + 30);
-      ctx.lineTo(-30, baseY);
+      ctx.arc(px, py, rad, 0, Math.PI * 2);
+      ctx.fill();
+    });
 
-      for (let x = -30; x <= width + 30; x += 8) {
-        const h1 = Math.sin(x * wave.freq1 + step * wave.speed1 + wave.phase);
-        const h2 = Math.cos(x * wave.freq2 + step * wave.speed2 + wave.phase * 1.5);
-        const h3 = Math.sin(x * wave.freq3 + step * wave.speed3);
-        const chaoticOffset = (h1 * 0.55 + h2 * 0.32 + h3 * 0.25) * wave.amplitude;
-        ctx.lineTo(x, baseY + chaoticOffset);
+    // 2. Render amorphous silver liquid waves (dark, smoky, fluid morphing)
+    liquidLayers.forEach((layer) => {
+      const baseY = height * layer.baseYRatio;
+
+      // Fill amorphous body
+      ctx.beginPath();
+      ctx.moveTo(-40, height + 40);
+      ctx.lineTo(-40, baseY);
+
+      for (let x = -40; x <= width + 40; x += 12) {
+        // Multi-layered non-linear fluid harmonics (creates amorphous liquid mercury shapes)
+        const a1 = Math.sin(x * layer.f1 + time * layer.s1 + layer.phase);
+        const a2 = Math.cos(x * layer.f2 + time * layer.s2 + layer.phase * 1.4);
+        const a3 = Math.sin(x * layer.f3 + time * layer.s3 + Math.cos(time * 0.3));
+        const liquidOffset = (a1 * 0.55 + a2 * 0.35 + a3 * 0.25) * layer.amp;
+
+        ctx.lineTo(x, baseY + liquidOffset);
       }
 
-      ctx.lineTo(width + 30, height + 30);
+      ctx.lineTo(width + 40, height + 40);
       ctx.closePath();
 
-      const grad = ctx.createLinearGradient(0, baseY - wave.amplitude, 0, height);
-      grad.addColorStop(0, wave.gradient[0]);
-      grad.addColorStop(1, wave.gradient[1]);
+      const grad = ctx.createLinearGradient(0, baseY - layer.amp, 0, height);
+      layer.gradient.forEach(g => grad.addColorStop(g.stop, g.color));
       ctx.fillStyle = grad;
       ctx.shadowBlur = 0;
       ctx.fill();
 
-      // 2. Stroke ONLY the crest line (extends past edges, zero vertical/bottom edge lines)
-      if (wave.stroke) {
+      // Delicate silver liquid edge reflection (soft diffuse specular sheen, NO hard lines)
+      if (layer.stroke) {
         ctx.beginPath();
         let isFirst = true;
 
-        for (let x = -30; x <= width + 30; x += 8) {
-          const h1 = Math.sin(x * wave.freq1 + step * wave.speed1 + wave.phase);
-          const h2 = Math.cos(x * wave.freq2 + step * wave.speed2 + wave.phase * 1.5);
-          const h3 = Math.sin(x * wave.freq3 + step * wave.speed3);
-          const chaoticOffset = (h1 * 0.55 + h2 * 0.32 + h3 * 0.25) * wave.amplitude;
-          const y = baseY + chaoticOffset;
+        for (let x = -40; x <= width + 40; x += 12) {
+          const a1 = Math.sin(x * layer.f1 + time * layer.s1 + layer.phase);
+          const a2 = Math.cos(x * layer.f2 + time * layer.s2 + layer.phase * 1.4);
+          const a3 = Math.sin(x * layer.f3 + time * layer.s3 + Math.cos(time * 0.3));
+          const liquidOffset = (a1 * 0.55 + a2 * 0.35 + a3 * 0.25) * layer.amp;
+          const y = baseY + liquidOffset;
 
           if (isFirst) {
             ctx.moveTo(x, y);
@@ -474,10 +524,10 @@ function initAmbientBackgroundWaves() {
           }
         }
 
-        ctx.strokeStyle = wave.stroke;
-        ctx.lineWidth = wave.lineWidth;
-        ctx.shadowColor = wave.glow;
-        ctx.shadowBlur = 18;
+        ctx.strokeStyle = layer.stroke;
+        ctx.lineWidth = layer.lineWidth;
+        ctx.shadowColor = layer.glow;
+        ctx.shadowBlur = layer.blur;
         ctx.stroke();
         ctx.shadowBlur = 0;
       }
