@@ -1340,8 +1340,8 @@ p {
 /* Organic Rising Wave Sheets that wash over text and reveal site */
 .intro-wave {
   position: absolute;
-  left: 0;
-  width: 100vw;
+  left: -3vw;
+  width: 106vw;
   height: calc(100vh + 160px);
   top: 100vh;
   pointer-events: none;

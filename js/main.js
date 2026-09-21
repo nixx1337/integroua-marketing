@@ -431,25 +431,22 @@ function initAmbientBackgroundWaves() {
     waveLayers.forEach((wave) => {
       const baseY = height * wave.yRatio;
       
+      // 1. Fill polygon for gradient (extends outside viewport to avoid borders)
       ctx.beginPath();
-      ctx.moveTo(0, height);
-      ctx.lineTo(0, baseY);
+      ctx.moveTo(-30, height + 30);
+      ctx.lineTo(-30, baseY);
 
-      // Chaotic multi-frequency trigonometric synthesis
-      for (let x = 0; x <= width; x += 8) {
+      for (let x = -30; x <= width + 30; x += 8) {
         const h1 = Math.sin(x * wave.freq1 + step * wave.speed1 + wave.phase);
         const h2 = Math.cos(x * wave.freq2 + step * wave.speed2 + wave.phase * 1.5);
         const h3 = Math.sin(x * wave.freq3 + step * wave.speed3);
         const chaoticOffset = (h1 * 0.55 + h2 * 0.32 + h3 * 0.25) * wave.amplitude;
-        
-        const y = baseY + chaoticOffset;
-        ctx.lineTo(x, y);
+        ctx.lineTo(x, baseY + chaoticOffset);
       }
 
-      ctx.lineTo(width, height);
+      ctx.lineTo(width + 30, height + 30);
       ctx.closePath();
 
-      // Rich vibrant vertical gradient
       const grad = ctx.createLinearGradient(0, baseY - wave.amplitude, 0, height);
       grad.addColorStop(0, wave.gradient[0]);
       grad.addColorStop(1, wave.gradient[1]);
@@ -457,8 +454,26 @@ function initAmbientBackgroundWaves() {
       ctx.shadowBlur = 0;
       ctx.fill();
 
-      // Vibrant, chaotic glowing neon edge line
+      // 2. Stroke ONLY the crest line (extends past edges, zero vertical/bottom edge lines)
       if (wave.stroke) {
+        ctx.beginPath();
+        let isFirst = true;
+
+        for (let x = -30; x <= width + 30; x += 8) {
+          const h1 = Math.sin(x * wave.freq1 + step * wave.speed1 + wave.phase);
+          const h2 = Math.cos(x * wave.freq2 + step * wave.speed2 + wave.phase * 1.5);
+          const h3 = Math.sin(x * wave.freq3 + step * wave.speed3);
+          const chaoticOffset = (h1 * 0.55 + h2 * 0.32 + h3 * 0.25) * wave.amplitude;
+          const y = baseY + chaoticOffset;
+
+          if (isFirst) {
+            ctx.moveTo(x, y);
+            isFirst = false;
+          } else {
+            ctx.lineTo(x, y);
+          }
+        }
+
         ctx.strokeStyle = wave.stroke;
         ctx.lineWidth = wave.lineWidth;
         ctx.shadowColor = wave.glow;
