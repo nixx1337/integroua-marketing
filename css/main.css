@@ -1307,7 +1307,7 @@ p {
   height: 150%;
   pointer-events: none;
   z-index: 0;
-  filter: blur(30px) contrast(3.4) brightness(1.05);
+  filter: blur(30px) contrast(3.4) brightness(0.55);
   overflow: hidden;
   background: #000000;
 }
@@ -1463,7 +1463,7 @@ p {
   background-position: 0% 0%;
   mix-blend-mode: soft-light;
   filter: blur(24px);
-  opacity: 0.85;
+  opacity: 0.55;
   will-change: background-position;
   animation: sheenMotion 73s ease-in-out infinite alternate;
 }
