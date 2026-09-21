@@ -337,6 +337,7 @@ function initPremiumIntro() {
     setTimeout(() => {
       document.body.classList.add('intro-finished');
       intro.remove(); 
-    }, 1200); // Wait for CSS transition (1s)
+    }, 1600); // Wait for CSS transition waves (max 1.5s)
   }, totalDuration);
 }
+
