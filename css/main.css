@@ -1287,3 +1287,76 @@ p {
     flex-shrink: 0;
   }
 }
+
+/* ==========================================================================
+   Premium Intro Overlay
+   ========================================================================== */
+.premium-intro {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-frame);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: transform 1s cubic-bezier(0.85, 0, 0.15, 1), opacity 1s cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+.premium-intro.animate-out {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.intro-content {
+  text-align: center;
+}
+
+.intro-line {
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.intro-text {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  transform: translateY(100%);
+  opacity: 0;
+  line-height: 1.2;
+}
+
+.intro-text.accent {
+  color: var(--accent-gold);
+}
+
+@keyframes slideUpFade {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.intro-text.animate-in {
+  animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+body.intro-active {
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .intro-text {
+    font-size: 2rem;
+  }
+}

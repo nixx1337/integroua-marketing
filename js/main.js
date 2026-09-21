@@ -4,6 +4,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initPremiumIntro();
   initHeaderScroll();
   initRouteAnimation();
   initMobileMenu();
@@ -289,4 +290,34 @@ function initUtmTracking() {
       });
     }
   });
+}
+
+/* Premium Intro Animation */
+function initPremiumIntro() {
+  const intro = document.getElementById('premium-intro');
+  if (!intro) return;
+
+  // Add class to body to prevent scrolling during intro
+  document.body.classList.add('intro-active');
+
+  const lines = intro.querySelectorAll('.intro-text');
+  
+  // Stagger animate text in
+  lines.forEach((line, index) => {
+    setTimeout(() => {
+      line.classList.add('animate-in');
+    }, 200 + (index * 400)); // Delay between lines
+  });
+
+  // Transition out after reading time
+  setTimeout(() => {
+    intro.classList.add('animate-out');
+    document.body.classList.remove('intro-active');
+    
+    // Optional: add a class to body to trigger main page animations
+    setTimeout(() => {
+      document.body.classList.add('intro-finished');
+      intro.remove(); // Clean up DOM
+    }, 1000);
+  }, 2200); // 2.2 seconds total reading time
 }
