@@ -30,13 +30,15 @@
   </script>
 </head>
 <body>
+  <!-- Continuous Abstract Floating Waves Canvas on Background -->
+  <canvas id="bg-floating-waves" class="site-bg-floating-waves" aria-hidden="true"></canvas>
+
   <!-- Premium Intro Overlay -->
   <div id="premium-intro" class="premium-intro">
-    <!-- Colored waves for transition -->
-    <div class="intro-bg intro-bg-3"></div>
-    <div class="intro-bg intro-bg-2"></div>
-    <div class="intro-bg intro-bg-1"></div>
+    <!-- Static backdrop behind intro text -->
+    <div class="intro-backdrop"></div>
     
+    <!-- Intro Text (stays 100% visible until physically covered by wave) -->
     <div class="intro-content">
       <div class="intro-line">
         <span class="intro-text">Безпечний ШІ починається з аудиту,</span>
@@ -45,6 +47,11 @@
         <span class="intro-text accent">а не з презентації.</span>
       </div>
     </div>
+
+    <!-- Rising wave curtains (z-index higher than text, sweeps up and covers it) -->
+    <div class="intro-wave-curtain intro-wave-gold"></div>
+    <div class="intro-wave-curtain intro-wave-dark"></div>
+    <div class="intro-wave-curtain intro-wave-canvas"></div>
   </div>
 
   <!-- Navigation Header -->

@@ -4,6 +4,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initAmbientBackgroundWaves();
   initPremiumIntro();
   initHeaderScroll();
   initRouteAnimation();
@@ -324,20 +325,117 @@ function initPremiumIntro() {
     });
   });
 
-  // Total reading time calculation (approx)
-  // Base delay (200) + all words stagger + hold time (1200)
-  const totalDuration = 200 + wordDelay + 1400;
+  // Total reading time calculation (+4000ms as requested by user)
+  const totalDuration = 200 + wordDelay + 1400 + 4000;
 
-  // Transition out after reading time
+  // Transition out after extended reading time
   setTimeout(() => {
     intro.classList.add('animate-out');
     document.body.classList.remove('intro-active');
     
-    // Clean up DOM after transition
+    // Clean up DOM after wave curtains complete sweep over the text and screen
     setTimeout(() => {
       document.body.classList.add('intro-finished');
       intro.remove(); 
-    }, 1600); // Wait for CSS transition waves (max 1.5s)
+    }, 2200); // 1.6s wave travel + 0.32s stagger delay
   }, totalDuration);
+}
+
+/* Continuous Abstract Floating Waves on Background (Speed 0.4) */
+function initAmbientBackgroundWaves() {
+  const canvas = document.getElementById('bg-floating-waves');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  let width = canvas.width = window.innerWidth;
+  let height = canvas.height = window.innerHeight;
+
+  window.addEventListener('resize', () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  });
+
+  // Speed requested by user: 0.4
+  const speed = 0.4;
+  let step = 0;
+
+  // Abstract wave layers in site brand palette
+  const waveLayers = [
+    {
+      yRatio: 0.35,
+      amplitude: 55,
+      wavelength: 0.0018,
+      speedMult: 1.0,
+      gradient: ['rgba(245, 158, 11, 0.07)', 'rgba(245, 158, 11, 0.00)'],
+      stroke: 'rgba(245, 158, 11, 0.12)'
+    },
+    {
+      yRatio: 0.52,
+      amplitude: 75,
+      wavelength: 0.0024,
+      speedMult: 0.75,
+      gradient: ['rgba(56, 189, 248, 0.05)', 'rgba(56, 189, 248, 0.00)'],
+      stroke: 'rgba(56, 189, 248, 0.10)'
+    },
+    {
+      yRatio: 0.68,
+      amplitude: 65,
+      wavelength: 0.0014,
+      speedMult: 1.25,
+      gradient: ['rgba(16, 185, 129, 0.04)', 'rgba(16, 185, 129, 0.00)'],
+      stroke: 'rgba(16, 185, 129, 0.08)'
+    },
+    {
+      yRatio: 0.85,
+      amplitude: 85,
+      wavelength: 0.0020,
+      speedMult: 0.85,
+      gradient: ['rgba(245, 158, 11, 0.04)', 'rgba(245, 158, 11, 0.00)'],
+      stroke: 'rgba(245, 158, 11, 0.07)'
+    }
+  ];
+
+  function render() {
+    ctx.clearRect(0, 0, width, height);
+    step += speed * 0.015;
+
+    waveLayers.forEach((wave) => {
+      const baseY = height * wave.yRatio;
+      
+      ctx.beginPath();
+      ctx.moveTo(0, height);
+      ctx.lineTo(0, baseY);
+
+      // Draw multi-harmonic fluid wave
+      for (let x = 0; x <= width; x += 10) {
+        const angle1 = x * wave.wavelength + step * wave.speedMult;
+        const angle2 = x * (wave.wavelength * 1.7) + step * (wave.speedMult * 0.6);
+        const y = baseY + Math.sin(angle1) * wave.amplitude + Math.cos(angle2) * (wave.amplitude * 0.35);
+        ctx.lineTo(x, y);
+      }
+
+      ctx.lineTo(width, height);
+      ctx.closePath();
+
+      // Subtle atmospheric vertical gradient
+      const grad = ctx.createLinearGradient(0, baseY - wave.amplitude, 0, height);
+      grad.addColorStop(0, wave.gradient[0]);
+      grad.addColorStop(1, wave.gradient[1]);
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      // Subtle glowing edge line
+      if (wave.stroke) {
+        ctx.strokeStyle = wave.stroke;
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+      }
+    });
+
+    requestAnimationFrame(render);
+  }
+
+  render();
 }
 

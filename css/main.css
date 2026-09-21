@@ -1289,6 +1289,20 @@ p {
 }
 
 /* ==========================================================================
+   Background Ambient Floating Waves (Speed 0.4)
+   ========================================================================== */
+.site-bg-floating-waves {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.85;
+}
+
+/* ==========================================================================
    Premium Intro Overlay
    ========================================================================== */
 .premium-intro {
@@ -1303,63 +1317,72 @@ p {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  pointer-events: none;
-}
-
-.intro-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
+  overflow: hidden;
   pointer-events: auto;
-  border-radius: 0 0 50% 50% / 0 0 0px 0px;
-  transform: translateY(0);
-  will-change: transform, border-radius;
 }
 
-.intro-bg-1 {
+.intro-backdrop {
+  position: absolute;
+  inset: 0;
   background: radial-gradient(circle at center, #1A1C23 0%, var(--bg-frame) 100%);
-  z-index: 3;
-}
-
-.intro-bg-2 {
-  background: var(--accent-gold);
-  z-index: 2;
-}
-
-.intro-bg-3 {
-  background: var(--bg-card);
   z-index: 1;
-}
-
-.premium-intro.animate-out .intro-bg {
-  transform: translateY(-100%);
-  border-radius: 0 0 50% 50% / 0 0 20vw 20vw;
-}
-
-.premium-intro.animate-out .intro-bg-1 {
-  transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), border-radius 1.2s cubic-bezier(0.77, 0, 0.175, 1);
-  transition-delay: 0s;
-}
-.premium-intro.animate-out .intro-bg-2 {
-  transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), border-radius 1.2s cubic-bezier(0.77, 0, 0.175, 1);
-  transition-delay: 0.15s;
-}
-.premium-intro.animate-out .intro-bg-3 {
-  transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), border-radius 1.2s cubic-bezier(0.77, 0, 0.175, 1);
-  transition-delay: 0.3s;
-}
-
-.premium-intro.animate-out .intro-content {
-  opacity: 0;
-  transition: opacity 0.5s ease;
 }
 
 .intro-content {
   text-align: center;
   position: relative;
-  z-index: 10;
+  z-index: 5; /* Text sits at z-index 5, covered physically by waves */
+  opacity: 1;
+}
+
+/* Rising wave curtains that sweep up from bottom and cover the text */
+.intro-wave-curtain {
+  position: absolute;
+  left: -5%;
+  width: 110%;
+  height: 130vh;
+  bottom: -135vh;
+  pointer-events: none;
+  border-radius: 50% 50% 0 0 / 16vw 16vw 0 0;
+  transform: translateY(0);
+  will-change: transform;
+}
+
+.intro-wave-gold {
+  background: linear-gradient(180deg, #F59E0B 0%, #B45309 100%);
+  box-shadow: 0 -20px 50px rgba(245, 158, 11, 0.45);
+  z-index: 20;
+}
+
+.intro-wave-dark {
+  background: linear-gradient(180deg, #1C1E24 0%, #0E0F12 100%);
+  box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.7);
+  z-index: 21;
+}
+
+.intro-wave-canvas {
+  background: var(--bg-canvas);
+  z-index: 22;
+}
+
+/* Animate out: Waves rise across viewport, cover text, and lift off top */
+.premium-intro.animate-out .intro-wave-curtain {
+  transform: translateY(-250vh);
+}
+
+.premium-intro.animate-out .intro-wave-gold {
+  transition: transform 1.6s cubic-bezier(0.65, 0, 0.35, 1);
+  transition-delay: 0s;
+}
+
+.premium-intro.animate-out .intro-wave-dark {
+  transition: transform 1.6s cubic-bezier(0.65, 0, 0.35, 1);
+  transition-delay: 0.16s;
+}
+
+.premium-intro.animate-out .intro-wave-canvas {
+  transition: transform 1.6s cubic-bezier(0.65, 0, 0.35, 1);
+  transition-delay: 0.32s;
 }
 
 .intro-line {
