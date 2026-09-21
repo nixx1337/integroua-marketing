@@ -325,19 +325,19 @@ function initPremiumIntro() {
     });
   });
 
-  // Total reading time calculation (+4000ms as requested by user)
-  const totalDuration = 200 + wordDelay + 1400 + 4000;
+  // Total reading time calculation (shortened by 2 seconds)
+  const totalDuration = 200 + wordDelay + 1400 + 2000;
 
-  // Transition out after extended reading time
+  // Transition out: organic wave sweeps over text and unveils the site
   setTimeout(() => {
     intro.classList.add('animate-out');
     document.body.classList.remove('intro-active');
     
-    // Clean up DOM after wave curtains complete sweep over the text and screen
+    // Clean up DOM after wave curtains complete sweep
     setTimeout(() => {
       document.body.classList.add('intro-finished');
       intro.remove(); 
-    }, 2200); // 1.6s wave travel + 0.32s stagger delay
+    }, 1800); // 1.5s wave travel + 0.18s stagger delay
   }, totalDuration);
 }
 

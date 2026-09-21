@@ -48,10 +48,19 @@
       </div>
     </div>
 
-    <!-- Rising wave curtains (z-index higher than text, sweeps up and covers it) -->
-    <div class="intro-wave-curtain intro-wave-gold"></div>
-    <div class="intro-wave-curtain intro-wave-dark"></div>
-    <div class="intro-wave-curtain intro-wave-canvas"></div>
+    <!-- Rising organic SVG waves (z-index higher than text, sweeps up and covers it) -->
+    <div class="intro-wave intro-wave-gold">
+      <svg class="wave-crest" viewBox="0 0 1440 200" preserveAspectRatio="none">
+        <path fill="#F59E0B" d="M0,64 C320,160 480,0 800,80 C1120,160 1280,40 1440,64 L1440,200 L0,200 Z"></path>
+      </svg>
+      <div class="wave-body wave-body-gold"></div>
+    </div>
+    <div class="intro-wave intro-wave-dark">
+      <svg class="wave-crest" viewBox="0 0 1440 200" preserveAspectRatio="none">
+        <path fill="#0B0C0E" d="M0,96 C240,20 600,160 900,60 C1200,-40 1350,100 1440,96 L1440,200 L0,200 Z"></path>
+      </svg>
+      <div class="wave-body wave-body-dark"></div>
+    </div>
   </div>
 
   <!-- Navigation Header -->

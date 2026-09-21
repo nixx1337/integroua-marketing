@@ -1335,54 +1335,63 @@ p {
   opacity: 1;
 }
 
-/* Rising wave curtains that sweep up from bottom and cover the text */
-.intro-wave-curtain {
+/* Organic Rising Wave Sheets that wash over text and reveal site */
+.intro-wave {
   position: absolute;
-  left: -5%;
-  width: 110%;
-  height: 130vh;
-  bottom: -135vh;
+  left: 0;
+  width: 100vw;
+  height: calc(100vh + 160px);
+  top: 100vh;
   pointer-events: none;
-  border-radius: 50% 50% 0 0 / 16vw 16vw 0 0;
   transform: translateY(0);
   will-change: transform;
 }
 
+.wave-crest {
+  display: block;
+  width: 100%;
+  height: 160px;
+}
+
+.wave-body {
+  width: 100%;
+  height: 100vh;
+}
+
 .intro-wave-gold {
-  background: linear-gradient(180deg, #F59E0B 0%, #B45309 100%);
-  box-shadow: 0 -20px 50px rgba(245, 158, 11, 0.45);
   z-index: 20;
+}
+.wave-body-gold {
+  background-color: #F59E0B;
 }
 
 .intro-wave-dark {
-  background: linear-gradient(180deg, #1C1E24 0%, #0E0F12 100%);
-  box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.7);
   z-index: 21;
 }
-
-.intro-wave-canvas {
-  background: var(--bg-canvas);
-  z-index: 22;
+.wave-body-dark {
+  background-color: #0B0C0E;
 }
 
-/* Animate out: Waves rise across viewport, cover text, and lift off top */
-.premium-intro.animate-out .intro-wave-curtain {
-  transform: translateY(-250vh);
+/* Animate out: Waves sweep up, wash over text, and reveal site */
+.premium-intro.animate-out .intro-wave {
+  transform: translateY(calc(-200vh - 160px));
 }
 
 .premium-intro.animate-out .intro-wave-gold {
-  transition: transform 1.6s cubic-bezier(0.65, 0, 0.35, 1);
+  transition: transform 1.5s cubic-bezier(0.65, 0, 0.25, 1);
   transition-delay: 0s;
 }
 
 .premium-intro.animate-out .intro-wave-dark {
-  transition: transform 1.6s cubic-bezier(0.65, 0, 0.35, 1);
-  transition-delay: 0.16s;
+  transition: transform 1.5s cubic-bezier(0.65, 0, 0.25, 1);
+  transition-delay: 0.18s;
 }
 
-.premium-intro.animate-out .intro-wave-canvas {
-  transition: transform 1.6s cubic-bezier(0.65, 0, 0.35, 1);
-  transition-delay: 0.32s;
+/* Once waves have physically covered the screen (~0.7s), fade out static backdrop */
+.premium-intro.animate-out .intro-backdrop,
+.premium-intro.animate-out .intro-content {
+  transition: opacity 0.3s ease 0.7s;
+  opacity: 0;
 }
 
 .intro-line {
