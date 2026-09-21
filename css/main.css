@@ -1307,7 +1307,7 @@ p {
   height: 150%;
   pointer-events: none;
   z-index: 0;
-  filter: blur(28px) contrast(2.3) brightness(1.08);
+  filter: blur(30px) contrast(3.4) brightness(1.05);
   overflow: hidden;
   background: #000000;
 }
@@ -1319,19 +1319,18 @@ p {
   pointer-events: none;
 }
 
-/* Layer 1: Metallic Platinum (43s cycle) — 4:6 black-to-bright ratio */
+/* Layer 1: Metallic Platinum (43s cycle) — 0.4 black to 0.6 platinum */
 .smoke span:nth-child(1) {
-  background-image: radial-gradient(ellipse 58% 38% at 35% 40%,
+  background-image: radial-gradient(ellipse 52% 32% at 35% 40%,
     rgba(0, 0, 0, 0)             0%,
-    rgba(0, 0, 0, 0)            12%,
-    rgba(140, 138, 134, 0.45)   20%,
-    rgba(195, 193, 189, 0.78)   30%,
-    rgba(235, 234, 231, 0.94)   40%,
+    rgba(0, 0, 0, 0)            24%,
+    rgba(130, 128, 124, 0.40)   32%,
+    rgba(215, 214, 210, 0.85)   42%,
     rgba(255, 255, 255, 1.00)   50%,
-    rgba(241, 240, 237, 0.95)   58%,
-    rgba(215, 214, 210, 0.82)   68%,
-    rgba(150, 148, 144, 0.50)   76%,
-    rgba(0, 0, 0, 0)            86%
+    rgba(235, 234, 231, 0.90)   58%,
+    rgba(145, 143, 139, 0.46)   66%,
+    rgba(0, 0, 0, 0)            74%,
+    rgba(0, 0, 0, 0)           100%
   );
   background-size: 200% 200%;
   background-position: 10% 20%;
@@ -1339,19 +1338,18 @@ p {
   animation: driftLayer1 43s ease-in-out infinite alternate;
 }
 
-/* Layer 2: Metallic Platinum (53s cycle) — 4:6 black-to-bright ratio */
+/* Layer 2: Metallic Platinum (53s cycle) — 0.4 black to 0.6 platinum */
 .smoke span:nth-child(2) {
-  background-image: radial-gradient(ellipse 52% 48% at 65% 55%,
+  background-image: radial-gradient(ellipse 46% 42% at 65% 55%,
     rgba(0, 0, 0, 0)             0%,
-    rgba(0, 0, 0, 0)            10%,
-    rgba(135, 133, 129, 0.42)   18%,
-    rgba(190, 188, 184, 0.76)   28%,
-    rgba(230, 229, 226, 0.92)   38%,
+    rgba(0, 0, 0, 0)            22%,
+    rgba(125, 123, 119, 0.38)   30%,
+    rgba(210, 209, 205, 0.82)   40%,
     rgba(255, 255, 255, 1.00)   48%,
-    rgba(240, 239, 236, 0.94)   56%,
-    rgba(210, 209, 205, 0.80)   66%,
-    rgba(145, 143, 139, 0.48)   75%,
-    rgba(0, 0, 0, 0)            85%
+    rgba(232, 231, 228, 0.88)   56%,
+    rgba(140, 138, 134, 0.44)   64%,
+    rgba(0, 0, 0, 0)            72%,
+    rgba(0, 0, 0, 0)           100%
   );
   background-size: 240% 210%;
   background-position: 80% 90%;
@@ -1359,19 +1357,18 @@ p {
   animation: driftLayer2 53s ease-in-out infinite alternate;
 }
 
-/* Layer 3: Metallic Platinum (67s cycle) — 4:6 black-to-bright ratio */
+/* Layer 3: Metallic Platinum (67s cycle) — 0.4 black to 0.6 platinum */
 .smoke span:nth-child(3) {
-  background-image: radial-gradient(ellipse 64% 34% at 42% 68%,
+  background-image: radial-gradient(ellipse 56% 28% at 42% 68%,
     rgba(0, 0, 0, 0)             0%,
-    rgba(0, 0, 0, 0)            12%,
-    rgba(142, 140, 136, 0.46)   20%,
-    rgba(200, 198, 194, 0.80)   30%,
-    rgba(238, 237, 234, 0.95)   42%,
+    rgba(0, 0, 0, 0)            24%,
+    rgba(135, 133, 129, 0.42)   32%,
+    rgba(220, 219, 215, 0.86)   42%,
     rgba(255, 255, 255, 1.00)   50%,
-    rgba(242, 241, 238, 0.94)   58%,
-    rgba(218, 217, 213, 0.82)   68%,
-    rgba(152, 150, 146, 0.50)   76%,
-    rgba(0, 0, 0, 0)            86%
+    rgba(238, 237, 234, 0.92)   58%,
+    rgba(148, 146, 142, 0.48)   66%,
+    rgba(0, 0, 0, 0)            75%,
+    rgba(0, 0, 0, 0)           100%
   );
   background-size: 190% 270%;
   background-position: 30% 70%;
@@ -1379,19 +1376,18 @@ p {
   animation: driftLayer3 67s ease-in-out infinite alternate;
 }
 
-/* Layer 4: Metallic Platinum (83s cycle) — 4:6 black-to-bright ratio */
+/* Layer 4: Metallic Platinum (83s cycle) — 0.4 black to 0.6 platinum */
 .smoke span:nth-child(4) {
-  background-image: radial-gradient(ellipse 46% 56% at 72% 32%,
+  background-image: radial-gradient(ellipse 40% 48% at 72% 32%,
     rgba(0, 0, 0, 0)             0%,
-    rgba(0, 0, 0, 0)            11%,
-    rgba(138, 136, 132, 0.44)   19%,
-    rgba(192, 190, 186, 0.76)   29%,
-    rgba(232, 231, 228, 0.92)   40%,
-    rgba(255, 255, 255, 1.00)   50%,
-    rgba(240, 239, 236, 0.94)   58%,
-    rgba(212, 211, 207, 0.80)   68%,
-    rgba(146, 144, 140, 0.48)   76%,
-    rgba(0, 0, 0, 0)            85%
+    rgba(0, 0, 0, 0)            23%,
+    rgba(128, 126, 122, 0.40)   31%,
+    rgba(212, 211, 207, 0.84)   41%,
+    rgba(255, 255, 255, 1.00)   49%,
+    rgba(234, 233, 230, 0.90)   57%,
+    rgba(142, 140, 136, 0.45)   65%,
+    rgba(0, 0, 0, 0)            73%,
+    rgba(0, 0, 0, 0)           100%
   );
   background-size: 290% 220%;
   background-position: 85% 15%;
@@ -1399,19 +1395,18 @@ p {
   animation: driftLayer4 83s ease-in-out infinite alternate;
 }
 
-/* Layer 5: Metallic Platinum (109s cycle) — 4:6 black-to-bright ratio */
+/* Layer 5: Metallic Platinum (109s cycle) — 0.4 black to 0.6 platinum */
 .smoke span:nth-child(5) {
-  background-image: radial-gradient(ellipse 68% 42% at 25% 62%,
+  background-image: radial-gradient(ellipse 60% 34% at 25% 62%,
     rgba(0, 0, 0, 0)             0%,
-    rgba(0, 0, 0, 0)            12%,
-    rgba(140, 138, 134, 0.45)   20%,
-    rgba(196, 194, 190, 0.78)   30%,
-    rgba(236, 235, 232, 0.94)   40%,
+    rgba(0, 0, 0, 0)            24%,
+    rgba(132, 130, 126, 0.42)   32%,
+    rgba(216, 215, 211, 0.85)   42%,
     rgba(255, 255, 255, 1.00)   50%,
-    rgba(241, 240, 237, 0.95)   58%,
-    rgba(216, 215, 211, 0.82)   68%,
-    rgba(150, 148, 144, 0.50)   76%,
-    rgba(0, 0, 0, 0)            86%
+    rgba(236, 235, 232, 0.90)   58%,
+    rgba(145, 143, 139, 0.46)   66%,
+    rgba(0, 0, 0, 0)            74%,
+    rgba(0, 0, 0, 0)           100%
   );
   background-size: 250% 300%;
   background-position: 15% 85%;
