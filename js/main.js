@@ -360,39 +360,39 @@ function initAmbientBackgroundWaves() {
   const speed = 0.4;
   let step = 0;
 
-  // Abstract wave layers in site brand palette
+  // Abstract wave layers in vibrant site brand palette
   const waveLayers = [
     {
       yRatio: 0.35,
-      amplitude: 55,
+      amplitude: 65,
       wavelength: 0.0018,
       speedMult: 1.0,
-      gradient: ['rgba(245, 158, 11, 0.07)', 'rgba(245, 158, 11, 0.00)'],
-      stroke: 'rgba(245, 158, 11, 0.12)'
+      gradient: ['rgba(245, 158, 11, 0.18)', 'rgba(245, 158, 11, 0.03)'],
+      stroke: 'rgba(251, 191, 36, 0.45)'
     },
     {
       yRatio: 0.52,
-      amplitude: 75,
+      amplitude: 85,
       wavelength: 0.0024,
       speedMult: 0.75,
-      gradient: ['rgba(56, 189, 248, 0.05)', 'rgba(56, 189, 248, 0.00)'],
-      stroke: 'rgba(56, 189, 248, 0.10)'
+      gradient: ['rgba(56, 189, 248, 0.16)', 'rgba(56, 189, 248, 0.02)'],
+      stroke: 'rgba(56, 189, 248, 0.40)'
     },
     {
       yRatio: 0.68,
-      amplitude: 65,
+      amplitude: 75,
       wavelength: 0.0014,
       speedMult: 1.25,
-      gradient: ['rgba(16, 185, 129, 0.04)', 'rgba(16, 185, 129, 0.00)'],
-      stroke: 'rgba(16, 185, 129, 0.08)'
+      gradient: ['rgba(16, 185, 129, 0.14)', 'rgba(16, 185, 129, 0.02)'],
+      stroke: 'rgba(52, 211, 153, 0.35)'
     },
     {
       yRatio: 0.85,
-      amplitude: 85,
+      amplitude: 95,
       wavelength: 0.0020,
       speedMult: 0.85,
-      gradient: ['rgba(245, 158, 11, 0.04)', 'rgba(245, 158, 11, 0.00)'],
-      stroke: 'rgba(245, 158, 11, 0.07)'
+      gradient: ['rgba(251, 191, 36, 0.15)', 'rgba(245, 158, 11, 0.02)'],
+      stroke: 'rgba(245, 158, 11, 0.38)'
     }
   ];
 
@@ -418,18 +418,22 @@ function initAmbientBackgroundWaves() {
       ctx.lineTo(width, height);
       ctx.closePath();
 
-      // Subtle atmospheric vertical gradient
+      // Atmospheric vertical gradient
       const grad = ctx.createLinearGradient(0, baseY - wave.amplitude, 0, height);
       grad.addColorStop(0, wave.gradient[0]);
       grad.addColorStop(1, wave.gradient[1]);
       ctx.fillStyle = grad;
+      ctx.shadowBlur = 0;
       ctx.fill();
 
-      // Subtle glowing edge line
+      // Vibrant glowing edge line
       if (wave.stroke) {
         ctx.strokeStyle = wave.stroke;
-        ctx.lineWidth = 1.2;
+        ctx.lineWidth = 2.0;
+        ctx.shadowColor = wave.stroke;
+        ctx.shadowBlur = 10;
         ctx.stroke();
+        ctx.shadowBlur = 0;
       }
     });
 
