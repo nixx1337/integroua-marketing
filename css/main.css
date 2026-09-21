@@ -1297,7 +1297,7 @@ p {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: var(--bg-frame);
+  background: radial-gradient(circle at center, #1A1C23 0%, var(--bg-frame) 100%);
   z-index: 99999;
   display: flex;
   align-items: center;
@@ -1318,37 +1318,51 @@ p {
 
 .intro-line {
   overflow: hidden;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
 }
 
 .intro-text {
-  display: inline-block;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   font-family: var(--font-display);
-  font-size: 3rem;
+  font-size: 3.5rem;
   font-weight: 700;
   color: var(--text-primary);
-  transform: translateY(100%);
-  opacity: 0;
-  line-height: 1.2;
+  line-height: 1.1;
 }
 
-.intro-text.accent {
+.intro-word {
+  display: inline-block;
+  transform: translateY(120%) rotate(2deg);
+  opacity: 0;
+  filter: blur(8px);
+  will-change: transform, opacity, filter;
+}
+
+.intro-text.accent .intro-word {
   color: var(--accent-gold);
 }
 
-@keyframes slideUpFade {
+@keyframes slideUpFadeBlur {
   0% {
-    transform: translateY(100%);
+    transform: translateY(120%) rotate(2deg);
     opacity: 0;
+    filter: blur(8px);
   }
   100% {
-    transform: translateY(0);
+    transform: translateY(0) rotate(0);
     opacity: 1;
+    filter: blur(0);
   }
 }
 
-.intro-text.animate-in {
-  animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.intro-word.animate-in {
+  animation: slideUpFadeBlur 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 body.intro-active {
@@ -1357,6 +1371,9 @@ body.intro-active {
 
 @media (max-width: 768px) {
   .intro-text {
-    font-size: 2rem;
+    font-size: 2.2rem;
+  }
+  .intro-line {
+    gap: 0.3rem;
   }
 }

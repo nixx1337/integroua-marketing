@@ -301,23 +301,42 @@ function initPremiumIntro() {
   document.body.classList.add('intro-active');
 
   const lines = intro.querySelectorAll('.intro-text');
+  let wordDelay = 0;
   
-  // Stagger animate text in
-  lines.forEach((line, index) => {
-    setTimeout(() => {
-      line.classList.add('animate-in');
-    }, 200 + (index * 400)); // Delay between lines
+  lines.forEach((line) => {
+    // Split text into words, wrap in spans
+    const text = line.innerText;
+    line.innerHTML = '';
+    const words = text.split(' ').filter(w => w.trim() !== '');
+    
+    words.forEach((word) => {
+      const span = document.createElement('span');
+      span.className = 'intro-word';
+      // Use innerHTML with non-breaking space if needed, or flex gap handles spacing
+      span.innerText = word;
+      line.appendChild(span);
+      
+      setTimeout(() => {
+        span.classList.add('animate-in');
+      }, 200 + wordDelay);
+      
+      wordDelay += 90; // 90ms stagger per word
+    });
   });
+
+  // Total reading time calculation (approx)
+  // Base delay (200) + all words stagger + hold time (1200)
+  const totalDuration = 200 + wordDelay + 1400;
 
   // Transition out after reading time
   setTimeout(() => {
     intro.classList.add('animate-out');
     document.body.classList.remove('intro-active');
     
-    // Optional: add a class to body to trigger main page animations
+    // Clean up DOM after transition
     setTimeout(() => {
       document.body.classList.add('intro-finished');
-      intro.remove(); // Clean up DOM
-    }, 1000);
-  }, 2200); // 2.2 seconds total reading time
+      intro.remove(); 
+    }, 1200); // Wait for CSS transition (1s)
+  }, totalDuration);
 }
