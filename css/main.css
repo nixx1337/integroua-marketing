@@ -1375,11 +1375,14 @@ p {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: baseline;
   font-family: var(--font-display);
   font-size: 3.5rem;
   font-weight: 700;
   color: var(--text-primary);
-  line-height: 1.1;
+  line-height: 1.2;
+  column-gap: 0.32em;
+  row-gap: 0.2em;
 }
 
 .intro-word {
@@ -1388,6 +1391,11 @@ p {
   opacity: 0;
   filter: blur(8px);
   will-change: transform, opacity, filter;
+  margin-right: 0.15em;
+}
+
+.intro-word:last-child {
+  margin-right: 0;
 }
 
 .intro-text.accent .intro-word {
