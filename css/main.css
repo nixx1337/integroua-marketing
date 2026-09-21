@@ -1358,6 +1358,8 @@ p {
 
 .intro-content {
   text-align: center;
+  position: relative;
+  z-index: 10;
 }
 
 .intro-line {
