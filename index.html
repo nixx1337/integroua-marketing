@@ -30,8 +30,22 @@
   </script>
 </head>
 <body>
-  <!-- Continuous Abstract Floating Waves Canvas on Background -->
-  <canvas id="bg-floating-waves" class="site-bg-floating-waves" aria-hidden="true"></canvas>
+  <!-- Pure CSS Flowing Silver Smoke Ribbon Engine -->
+  <div class="smoke" aria-hidden="true">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="sheen" aria-hidden="true"></div>
+  <svg class="grain" aria-hidden="true">
+    <filter id="noiseFilter">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#noiseFilter)"/>
+  </svg>
+  <div class="vignette" aria-hidden="true"></div>
 
   <!-- Premium Intro Overlay -->
   <div id="premium-intro" class="premium-intro">
