@@ -2,4 +2,4 @@
 # Syntax: /source  /destination  code
 
 # Custom 404 fallback
-/*  /404.html  404
+# /*  /404.html  404
