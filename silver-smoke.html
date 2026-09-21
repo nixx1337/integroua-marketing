@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Silver Liquid Smoke Ribbons — Pure CSS Background</title>
+  <style>
+    /* ==========================================================================
+       RESET & VIEWPORT
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #000000;
+      color: #FFFFFF;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    /* ==========================================================================
+       TUNING KNOBS (Adjust these pairs to customize the effect)
+       1. Contrast = edge hardness, Blur = softness (tune as a pair: blur 30-40px, contrast 3.8-5.0)
+       2. Spread between shadow and specular stops = strength of the metal effect
+       3. .sheen opacity = striation intensity (0.6 - 0.9)
+       ========================================================================== */
+
+    /* --------------------------------------------------------------------------
+       1. THE SMOKE ENGINE WRAPPER
+       Negative inset prevents blurred edges from exposing viewport boundaries.
+       High contrast + heavy blur melts ring gradients into defined silver ribbons.
+       -------------------------------------------------------------------------- */
+    .smoke {
+      position: fixed;
+      inset: -20%;
+      width: 140%;
+      height: 140%;
+      pointer-events: none;
+      z-index: 1;
+      /* Knobs: blur melts gradients together; contrast crushes midtones & defines metal ribbons */
+      filter: blur(34px) contrast(4.4) brightness(1.02);
+      overflow: hidden;
+      background: #000000;
+    }
+
+    .smoke span {
+      position: absolute;
+      inset: 0;
+      will-change: background-position;
+      pointer-events: none;
+    }
+
+    /* --------------------------------------------------------------------------
+       RING GRADIENT LAYERS (5 Oversized Layers with Asynchronous Durations)
+       Rings: Transparent center -> shadow -> light -> specular peak -> shadow -> transparent.
+       Specular peak alpha lands right around 0.70-0.94 to produce crisp metallic filaments.
+       -------------------------------------------------------------------------- */
+
+    /* Layer 1: 17s duration — Diagonal left-to-right drift */
+    .smoke span:nth-child(1) {
+      background-image: radial-gradient(ellipse 48% 26% at 32% 42%,
+        rgba(255, 255, 255, 0)     33%,
+        rgba(104, 114, 130, 0.34) 40%,  /* shadow side */
+        rgba(206, 214, 226, 0.72) 45%,  /* light ramp  */
+        rgba(255, 255, 255, 0.92) 47%,  /* specular    */
+        rgba(138, 148, 164, 0.40) 53%,  /* shadow side */
+        rgba(255, 255, 255, 0)     61%
+      );
+      background-size: 200% 200%;
+      background-position: 10% 20%;
+      transform: rotate(-14deg) scale(1.1);
+      animation: driftLayer1 17s ease-in-out infinite alternate;
+    }
+
+    /* Layer 2: 21s duration — Upward-surging sweep */
+    .smoke span:nth-child(2) {
+      background-image: radial-gradient(ellipse 42% 38% at 65% 55%,
+        rgba(255, 255, 255, 0)     30%,
+        rgba(98, 108, 124, 0.32)  38%,  /* shadow side */
+        rgba(195, 205, 220, 0.68) 43%,  /* light ramp  */
+        rgba(255, 255, 255, 0.88) 45%,  /* specular    */
+        rgba(120, 130, 146, 0.36) 51%,  /* shadow side */
+        rgba(255, 255, 255, 0)     59%
+      );
+      background-size: 260% 220%;
+      background-position: 80% 90%;
+      transform: rotate(18deg) scale(1.15);
+      animation: driftLayer2 21s ease-in-out infinite alternate;
+    }
+
+    /* Layer 3: 26s duration — Horizontal wave crossing */
+    .smoke span:nth-child(3) {
+      background-image: radial-gradient(ellipse 54% 22% at 40% 70%,
+        rgba(255, 255, 255, 0)     28%,
+        rgba(112, 122, 138, 0.35) 36%,  /* shadow side */
+        rgba(215, 222, 232, 0.74) 42%,  /* light ramp  */
+        rgba(255, 255, 255, 0.94) 44%,  /* specular    */
+        rgba(142, 150, 166, 0.38) 50%,  /* shadow side */
+        rgba(255, 255, 255, 0)     58%
+      );
+      background-size: 180% 280%;
+      background-position: 30% 70%;
+      transform: rotate(-28deg) scale(1.08);
+      animation: driftLayer3 26s ease-in-out infinite alternate;
+    }
+
+    /* Layer 4: 34s duration — Sweeping diagonal counter-flow */
+    .smoke span:nth-child(4) {
+      background-image: radial-gradient(ellipse 36% 46% at 75% 30%,
+        rgba(255, 255, 255, 0)     32%,
+        rgba(92, 102, 118, 0.30)  39%,  /* shadow side */
+        rgba(188, 198, 214, 0.65) 44%,  /* light ramp  */
+        rgba(255, 255, 255, 0.86) 46%,  /* specular    */
+        rgba(128, 138, 154, 0.34) 52%,  /* shadow side */
+        rgba(255, 255, 255, 0)     60%
+      );
+      background-size: 310% 210%;
+      background-position: 85% 15%;
+      transform: rotate(12deg) scale(1.12);
+      animation: driftLayer4 34s ease-in-out infinite alternate;
+    }
+
+    /* Layer 5: 44s duration — Deep slow ambient undulation */
+    .smoke span:nth-child(5) {
+      background-image: radial-gradient(ellipse 60% 30% at 20% 60%,
+        rgba(255, 255, 255, 0)     31%,
+        rgba(100, 110, 126, 0.32) 38%,  /* shadow side */
+        rgba(200, 210, 224, 0.70) 43%,  /* light ramp  */
+        rgba(255, 255, 255, 0.90) 45%,  /* specular    */
+        rgba(130, 140, 156, 0.36) 51%,  /* shadow side */
+        rgba(255, 255, 255, 0)     59%
+      );
+      background-size: 240% 320%;
+      background-position: 15% 85%;
+      transform: rotate(-6deg) scale(1.2);
+      animation: driftLayer5 44s ease-in-out infinite alternate;
+    }
+
+    /* --------------------------------------------------------------------------
+       LAYER KEYFRAMES (background-position only, non-repeating primes)
+       -------------------------------------------------------------------------- */
+    @keyframes driftLayer1 {
+      0%   { background-position: 10% 20%; }
+      50%  { background-position: 85% 45%; }
+      100% { background-position: 35% 90%; }
+    }
+
+    @keyframes driftLayer2 {
+      0%   { background-position: 80% 90%; }
+      50%  { background-position: 25% 60%; }
+      100% { background-position: 70% 15%; }
+    }
+
+    @keyframes driftLayer3 {
+      0%   { background-position: 30% 70%; }
+      50%  { background-position: 90% 25%; }
+      100% { background-position: 15% 35%; }
+    }
+
+    @keyframes driftLayer4 {
+      0%   { background-position: 85% 15%; }
+      50%  { background-position: 15% 80%; }
+      100% { background-position: 60% 95%; }
+    }
+
+    @keyframes driftLayer5 {
+      0%   { background-position: 15% 85%; }
+      50%  { background-position: 80% 40%; }
+      100% { background-position: 45% 10%; }
+    }
+
+    /* --------------------------------------------------------------------------
+       2. METALLIC SHEEN LAYER
+       Angled brushed striations blended via soft-light.
+       Appears exclusively over the silver ribbons; invisible over pure black.
+       -------------------------------------------------------------------------- */
+    .sheen {
+      position: fixed;
+      inset: -10%;
+      width: 120%;
+      height: 120%;
+      pointer-events: none;
+      z-index: 2;
+      background-image: repeating-linear-gradient(
+        64deg,
+        rgba(255, 255, 255, 0.26) 0px,
+        rgba(0, 0, 0, 0.34)       17px,
+        rgba(255, 255, 255, 0.26) 29px
+      );
+      background-size: 220% 220%;
+      background-position: 0% 0%;
+      mix-blend-mode: soft-light;
+      filter: blur(7px);
+      opacity: 0.8;
+      will-change: background-position;
+      animation: sheenMotion 29s ease-in-out infinite alternate;
+    }
+
+    @keyframes sheenMotion {
+      0%   { background-position: 0% 0%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 40% 100%; }
+    }
+
+    /* --------------------------------------------------------------------------
+       3. GRAIN LAYER
+       Subtle analog microstructure via SVG fractalNoise.
+       -------------------------------------------------------------------------- */
+    .grain {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 3;
+      opacity: 0.14;
+      mix-blend-mode: overlay;
+    }
+
+    /* --------------------------------------------------------------------------
+       4. VIGNETTE LAYER
+       Soft falloff towards borders ensuring pure pitch-black framing.
+       -------------------------------------------------------------------------- */
+    .vignette {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 4;
+      background: radial-gradient(circle at 50% 50%, transparent 45%, rgba(0, 0, 0, 0.6) 100%);
+    }
+
+    /* --------------------------------------------------------------------------
+       5. CONTENT LAYER (Centered Hero Text)
+       Enhanced with deep multi-level text-shadow for permanent legibility.
+       -------------------------------------------------------------------------- */
+    .content {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 24px;
+      text-align: center;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 9999px;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 24px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      box-shadow: 0 0 8px #FFFFFF;
+    }
+
+    .title {
+      font-size: clamp(2.5rem, 6.5vw, 5.25rem);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.1;
+      margin: 0 0 20px;
+      max-width: 960px;
+      color: #FFFFFF;
+      text-shadow: 
+        0 4px 24px rgba(0, 0, 0, 0.98),
+        0 2px 10px rgba(0, 0, 0, 0.95),
+        0 0 40px rgba(0, 0, 0, 0.9);
+    }
+
+    .subtitle {
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      font-weight: 400;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.72);
+      max-width: 640px;
+      margin: 0 0 36px;
+      text-shadow: 
+        0 2px 16px rgba(0, 0, 0, 0.98),
+        0 1px 6px rgba(0, 0, 0, 0.9);
+    }
+
+    .cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 30px;
+      border-radius: 9999px;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-silver {
+      background: #FFFFFF;
+      color: #000000;
+      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.25);
+    }
+
+    .btn-silver:hover {
+      box-shadow: 0 6px 28px rgba(255, 255, 255, 0.4);
+    }
+
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.05);
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    /* --------------------------------------------------------------------------
+       ACCESSIBILITY (Reduced Motion)
+       -------------------------------------------------------------------------- */
+    @media (prefers-reduced-motion: reduce) {
+      .smoke span,
+      .sheen {
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Flowing Silver Smoke Ribbon Engine (Pure CSS Ring Gradients + Blur/Contrast) -->
+  <div class="smoke" aria-hidden="true">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- 2. Metallic Sheen Layer (Brushed Metal Striations via soft-light) -->
+  <div class="sheen" aria-hidden="true"></div>
+
+  <!-- 3. Film Grain Microstructure (feTurbulence fractalNoise) -->
+  <svg class="grain" aria-hidden="true">
+    <filter id="noiseFilter">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#noiseFilter)"/>
+  </svg>
+
+  <!-- 4. Deep Vignette (Pure Black Border Falloff) -->
+  <div class="vignette" aria-hidden="true"></div>
+
+  <!-- 5. Content Layer (Always legible over moving specular ribbons) -->
+  <main class="content">
+    <div class="pill">
+      <span class="pill-dot"></span>
+      Liquid Metal Engine
+    </div>
+    <h1 class="title">Flowing Silver Smoke Ribbons</h1>
+    <p class="subtitle">
+      Zero JavaScript. Zero canvas. Zero libraries. Pure CSS ring gradients melted by Gaussian blur and sculpted into polished metallic filaments by contrast curves.
+    </p>
+    <div class="cta-group">
+      <a href="#explore" class="btn btn-silver">Explore Dynamics</a>
+      <a href="#specs" class="btn btn-outline">View Architecture</a>
+    </div>
+  </main>
+
+</body>
+</html>
