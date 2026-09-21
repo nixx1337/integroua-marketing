@@ -325,8 +325,8 @@ function initPremiumIntro() {
     });
   });
 
-  // Total reading time calculation (shortened by 2 seconds)
-  const totalDuration = 200 + wordDelay + 1400 + 2000;
+  // Total reading time calculation (shortened by another 1 second)
+  const totalDuration = 200 + wordDelay + 1400 + 1000;
 
   // Transition out: organic wave sweeps over text and unveils the site
   setTimeout(() => {
@@ -341,7 +341,7 @@ function initPremiumIntro() {
   }, totalDuration);
 }
 
-/* Continuous Abstract Floating Waves on Background (Speed 0.4) */
+/* Continuous Abstract Chaotic Floating Waves on Background (Speed 0.4) */
 function initAmbientBackgroundWaves() {
   const canvas = document.getElementById('bg-floating-waves');
   if (!canvas) return;
@@ -356,49 +356,77 @@ function initAmbientBackgroundWaves() {
     height = canvas.height = window.innerHeight;
   });
 
-  // Speed requested by user: 0.4
+  // Base speed requested by user: 0.4
   const speed = 0.4;
   let step = 0;
 
-  // Abstract wave layers in vibrant site brand palette
+  // Chaotic, vibrant multi-harmonic wave layers
   const waveLayers = [
     {
-      yRatio: 0.35,
-      amplitude: 65,
-      wavelength: 0.0018,
-      speedMult: 1.0,
-      gradient: ['rgba(245, 158, 11, 0.18)', 'rgba(245, 158, 11, 0.03)'],
-      stroke: 'rgba(251, 191, 36, 0.45)'
+      yRatio: 0.28,
+      amplitude: 80,
+      freq1: 0.0016,
+      freq2: 0.0037,
+      freq3: 0.0009,
+      speed1: 1.1,
+      speed2: -0.85,
+      speed3: 0.6,
+      phase: 0.4,
+      gradient: ['rgba(251, 191, 36, 0.45)', 'rgba(217, 119, 6, 0.05)'],
+      stroke: 'rgba(253, 224, 71, 0.95)',
+      glow: '#F59E0B',
+      lineWidth: 3.2
     },
     {
-      yRatio: 0.52,
-      amplitude: 85,
-      wavelength: 0.0024,
-      speedMult: 0.75,
-      gradient: ['rgba(56, 189, 248, 0.16)', 'rgba(56, 189, 248, 0.02)'],
-      stroke: 'rgba(56, 189, 248, 0.40)'
+      yRatio: 0.46,
+      amplitude: 105,
+      freq1: 0.0022,
+      freq2: 0.0049,
+      freq3: 0.0012,
+      speed1: -0.9,
+      speed2: 1.3,
+      speed3: -0.5,
+      phase: 1.8,
+      gradient: ['rgba(56, 189, 248, 0.42)', 'rgba(2, 132, 199, 0.04)'],
+      stroke: 'rgba(125, 211, 252, 0.90)',
+      glow: '#38BDF8',
+      lineWidth: 3.0
     },
     {
-      yRatio: 0.68,
-      amplitude: 75,
-      wavelength: 0.0014,
-      speedMult: 1.25,
-      gradient: ['rgba(16, 185, 129, 0.14)', 'rgba(16, 185, 129, 0.02)'],
-      stroke: 'rgba(52, 211, 153, 0.35)'
+      yRatio: 0.64,
+      amplitude: 90,
+      freq1: 0.0013,
+      freq2: 0.0031,
+      freq3: 0.0021,
+      speed1: 1.3,
+      speed2: -1.1,
+      speed3: 0.8,
+      phase: 3.2,
+      gradient: ['rgba(16, 185, 129, 0.38)', 'rgba(5, 150, 105, 0.04)'],
+      stroke: 'rgba(110, 231, 183, 0.85)',
+      glow: '#10B981',
+      lineWidth: 2.8
     },
     {
-      yRatio: 0.85,
-      amplitude: 95,
-      wavelength: 0.0020,
-      speedMult: 0.85,
-      gradient: ['rgba(251, 191, 36, 0.15)', 'rgba(245, 158, 11, 0.02)'],
-      stroke: 'rgba(245, 158, 11, 0.38)'
+      yRatio: 0.82,
+      amplitude: 115,
+      freq1: 0.0019,
+      freq2: 0.0041,
+      freq3: 0.0008,
+      speed1: -1.0,
+      speed2: 0.7,
+      speed3: 1.4,
+      phase: 4.6,
+      gradient: ['rgba(245, 158, 11, 0.40)', 'rgba(180, 83, 9, 0.04)'],
+      stroke: 'rgba(251, 191, 36, 0.88)',
+      glow: '#FBBF24',
+      lineWidth: 3.0
     }
   ];
 
   function render() {
     ctx.clearRect(0, 0, width, height);
-    step += speed * 0.015;
+    step += speed * 0.022;
 
     waveLayers.forEach((wave) => {
       const baseY = height * wave.yRatio;
@@ -407,18 +435,21 @@ function initAmbientBackgroundWaves() {
       ctx.moveTo(0, height);
       ctx.lineTo(0, baseY);
 
-      // Draw multi-harmonic fluid wave
-      for (let x = 0; x <= width; x += 10) {
-        const angle1 = x * wave.wavelength + step * wave.speedMult;
-        const angle2 = x * (wave.wavelength * 1.7) + step * (wave.speedMult * 0.6);
-        const y = baseY + Math.sin(angle1) * wave.amplitude + Math.cos(angle2) * (wave.amplitude * 0.35);
+      // Chaotic multi-frequency trigonometric synthesis
+      for (let x = 0; x <= width; x += 8) {
+        const h1 = Math.sin(x * wave.freq1 + step * wave.speed1 + wave.phase);
+        const h2 = Math.cos(x * wave.freq2 + step * wave.speed2 + wave.phase * 1.5);
+        const h3 = Math.sin(x * wave.freq3 + step * wave.speed3);
+        const chaoticOffset = (h1 * 0.55 + h2 * 0.32 + h3 * 0.25) * wave.amplitude;
+        
+        const y = baseY + chaoticOffset;
         ctx.lineTo(x, y);
       }
 
       ctx.lineTo(width, height);
       ctx.closePath();
 
-      // Atmospheric vertical gradient
+      // Rich vibrant vertical gradient
       const grad = ctx.createLinearGradient(0, baseY - wave.amplitude, 0, height);
       grad.addColorStop(0, wave.gradient[0]);
       grad.addColorStop(1, wave.gradient[1]);
@@ -426,12 +457,12 @@ function initAmbientBackgroundWaves() {
       ctx.shadowBlur = 0;
       ctx.fill();
 
-      // Vibrant glowing edge line
+      // Vibrant, chaotic glowing neon edge line
       if (wave.stroke) {
         ctx.strokeStyle = wave.stroke;
-        ctx.lineWidth = 2.0;
-        ctx.shadowColor = wave.stroke;
-        ctx.shadowBlur = 10;
+        ctx.lineWidth = wave.lineWidth;
+        ctx.shadowColor = wave.glow;
+        ctx.shadowBlur = 18;
         ctx.stroke();
         ctx.shadowBlur = 0;
       }

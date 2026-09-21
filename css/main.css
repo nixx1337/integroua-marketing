@@ -109,9 +109,11 @@ body {
   z-index: 1;
 }
 
-/* Section Frame (Portfolite Signature Outer Container) */
+/* Section Frame (Portfolite Signature Outer Container with Frosted Glass) */
 .section-frame {
-  background-color: var(--bg-frame);
+  background-color: rgba(11, 12, 14, 0.78);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-frame);
   padding: 64px 52px;
@@ -1299,7 +1301,7 @@ p {
   height: 100vh;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.85;
+  opacity: 1;
 }
 
 /* ==========================================================================
